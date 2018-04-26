@@ -1,0 +1,33 @@
+﻿@model IEnumerable<selfCoding.Areas.Admin.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail">
+                <img src="~/Images/ProductImages/@item.Id/@item.ImageFile" width="100px" />
+                <div class="caption">
+                    <h3>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </h3>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Description)
+                        <div>
+                            &pound; @Html.DisplayFor(modelItem => item.Price)
+                        </div>
+                    </p>
+                    <p>
+                        @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.Id }, new { @class = "btn btn-default" })
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

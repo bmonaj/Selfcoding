@@ -1,0 +1,57 @@
+﻿@model selfCoding.Models.CartVM
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+<p>
+    @Html.ActionLink("Back to Shopping", "Products")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CartItems.First().Product.Name)
+        </th>
+        <th>
+            Unit Price
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CartItems.First().Quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.CartItems) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("+","Add",new { id=item.Id }) 
+        </td>
+        <td>
+            @if (item.Quantity>1)
+            {
+                @Html.ActionLink("-", "Remove", new { id = item.Id })
+            }
+            
+        </td>
+</tr>
+}
+
+</table>
+<div class="row"><label class="col-md-2">Total </label><span>@Model.Total</span></div>
+<div class="row">
+     @Html.ActionLink("Check Out", "CheckOut", new { }, new { @class = "btn btn-default" })
+</div>
